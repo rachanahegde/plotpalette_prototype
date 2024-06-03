@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <title> Image Generation </title>
+</head>
+<body>
+    <!-- Nav bar -->
+    <div class="nav-bar">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/storyboard">Storyboard</a></li>
+                <li><a href="/generate_images">Image Generation</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Image Generation Form -->
+    <main>
+        <h1> Generate images for your storyboard </h1>
+        <div id="image-generation">
+            <div id="prompt-design">
+                <h2> Design your prompt </h2>
+                <p> Option 1: To generate standalone images, click on Create Scene and click <b>no</b> for the question about generating images of the same character.</p>
+                <p> Option 2: To generate consistent images of a single character, start with Create Character. (<b>IMPORTANT:</b> Make sure to give specific details of the character's appearance to improve image generation accuracy. When filling out the form for the Create Scene tab, keep the <b>image style</b> and <b>genre</b> the same to maintain visual consistency.)</p>
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'CreateCharacter')" id="defaultOpen">Create Character</button>
+                    <button class="tablinks" onclick="openTab(event, 'CreateScene')">Create Scene</button>
+                </div>
+
+                <div id="CreateCharacter" class="tabcontent">
+                    <h3> Describe Your Character </h3>
+                    <p> Note: To ensure that the character's appearance is consistent across different images, provide
+                        as many details as possible and avoid editing the character description
+                        each time you generate a new image featuring the same character. </p>
+
+                    <form method="POST" action="/generate_images" name="create_character">
+                    <!-- Use form to get details about main character: name, height, ethnicity, age, gender,
+                    hair color & length, eye color & eye shape, clothing style, accessories (i.e. jewelry), other info -->
+                        <label for="character-name" id="character-name-label" class="label-text">Character Name (Required): </label>
+                        <input type="text" id="character-name" name="character-name" required><br><br>
+
+                        <label for="gender" id="character-gender-label" class="label-text"> Gender (Required): </label>
+                        <input type="text" id="gender" name="character-gender" required><br><br>
+
+                        <label for="age" id="character-age-label" class="label-text"> Age (Required): </label>
+                        <input type="text" id="age" name="character-age" required><br><br>
+
+                        <label for="height" id="character-height-label" class="label-text"> Height (i.e. tall): </label>
+                        <input type="text" id="height" name="character-height"><br><br>
+
+                        <label for="ethnicity" id="ethnicity-label" class="label-text"> Ethnicity: </label>
+                        <input type="text" id="ethnicity" name="character-ethnicity"><br><br>
+
+                        <label for="hair" id="character-hair-label" class="label-text"> Hairstyle (color, length): </label>
+                        <input type="text" id="hair" name="character-hair"><br><br>
+
+                        <label for="eyes" id="character-eyes-label" class="label-text"> Eyes (color, shape): </label>
+                        <input type="text" id="eyes" name="character-eyes"><br><br>
+
+                        <label for="clothing" id="clothing-label" class="label-text"> Clothing: </label>
+                        <input type="text" id="clothing" name="clothing"><br><br>
+
+                        <label for="accessories" id="accessories-label" class="label-text"> Accessories: </label>
+                        <input type="text" id="accessories" name="accessories"><br><br>
+
+                        <label for="personality" id="personality-label" class="label-text"> Personality: </label>
+                        <input type="text" id="personality" name="personality"><br><br>
+
+                        <!-- Field for user to describe additional features such as face shape -->
+                        <label for="other-features" id="other-features-label" class="label-text"> Other physical features (i.e. tattoos, scars): </label>
+                        <input type="text" id="other-features" name="other-features"><br><br>
+
+                        <!-- Create character description button -->
+                        <button id="create_char_btn" type="submit" name="form_action" value="create_character">Create Character</button>
+                    </form>
+
+                    <h3> Character description </h3>
+                    <p> This information will be added to the final prompt and used to guide image generation. </p>
+                    <p class="generated-content">{{ character_description }}</p>
+                    <p> Update form fields and click on Create Character to generate a new description. </p>
+                    <p> Click on Next when you are ready to generate images of this character. </p>
+                    <button type="button" class="nextTabBtn"> Next </button>
+                </div>
+
+                <div id="CreateScene" class="tabcontent">
+                    <h3>Create Scene</h3>
+                    <form method="POST" action="/generate_images" name="create_scene">
+                        <label for="char-consistency"> Do you want to generate images of the same character in different locations doing different actions? </label>
+                        <select id="char-consistency" name="char-consistency">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select><br><br>
+                        <p> What do you want to generate an image of? </p>
+
+                        <label for="regular-prompt" id="regular-prompt-label" class="label-text"> Prompt (Required): </label><br><br>
+                        <textarea id="regular-prompt" name="regular-prompt" cols="50" required></textarea><br><br>
+
+                        <div class="photo-angle-div">
+                            <p class="angles-list"> Photo Angle (Pick One): </p>
+                            <label><input type="checkbox" name="angles[]" value="wide-angle"> Wide Angle</label><br>
+                            <label><input type="checkbox" name="angles[]" value="full-body"> Full Body </label><br>
+                            <label><input type="checkbox" name="angles[]" value="portrait"> Portrait</label><br>
+                            <label><input type="checkbox" name="angles[]" value="close-up"> Close Up</label><br>
+                            <label><input type="checkbox" name="angles[]" value="extreme-long"> Extreme Long shot</label><br>
+                            <label><input type="checkbox" name="angles[]" value="overhead-view"> Overhead View</label><br>
+                        </div>
+
+                        <p> Describe the setting. </p>
+
+                        <label for="location" id="location-label" class="label-text"> Location: </label>
+                        <input type="text" id="location" name="location"><br><br>
+
+                        <label for="time-period" id="time-period-label" class="label-text"> Time Period: </label>
+                        <input type="text" id="time-period" name="time-period"><br><br>
+
+                        <label for="lighting" id="lighting-label" class="label-text"> Lighting: </label>
+                        <input type="text" id="lighting" name="lighting"><br><br>
+
+                        <p> Specify preferences for the image style. </p>
+
+                        <!-- Image style preferences -->
+                        <div class="image-style-div">
+                            <p class="styles-list"> Preferred Image Styles (Pick One or Two): </p>
+                            <label><input type="checkbox" name="styles[]" value="surreal"> Surreal</label><br>
+                            <label><input type="checkbox" name="styles[]" value="photo-realistic"> Photorealistic</label><br>
+                            <label><input type="checkbox" name="styles[]" value="fantasy"> Fantasy</label><br>
+                            <label><input type="checkbox" name="styles[]" value="futuristic"> Futuristic</label><br>
+                            <label><input type="checkbox" name="styles[]" value="abstract"> Abstract</label><br>
+                            <label><input type="checkbox" name="styles[]" value="cartoon"> Cartoon</label><br>
+                            <label><input type="checkbox" name="styles[]" value="realistic"> Realistic</label><br>
+                            <label><input type="checkbox" name="styles[]" value="watercolor"> Watercolor</label><br>
+                            <label><input type="checkbox" name="styles[]" value="gothic"> Gothic</label><br>
+                        </div>
+
+                        <!-- Color palette -->
+                        <label for="color-palette" id="color-palette-label" class="label-text"> Color Palette (i.e. warm): </label>
+                        <input type="text" id="color-palette" name="color-palette"><br><br>
+
+                        <!-- Genre -->
+                        <label for="genre" id="genre-label" class="label-text"> Genre (i.e. fantasy): </label>
+                        <input type="text" id="genre" name="genre"><br><br>
+
+                        <label for="mood" id="mood-label" class="label-text"> Mood (i.e. romantic): </label>
+                        <input type="text" id="mood" name="mood"><br><br>
+
+                        <p> Describe the character's behaviour. </p>
+
+                        <label for="demeanour" id="demeanour-label" class="label-text"> Demeanour (i.e. reserved): </label>
+                        <input type="text" id="demeanour" name="demeanour"><br><br>
+
+                        <label for="expression" id="expression-label" class="label-text"> Expression: </label>
+                        <input type="text" id="expression" name="expression"><br><br>
+
+                        <p> Do you want the characters to be posed or should the image be a candid shot? </p>
+                        <label for="candid-shot"> Candid shot: </label>
+                        <select id="candid-shot" name="candid-shot">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select><br><br>
+
+                        <!-- Create image prompt by sending information to GPT-4 -->
+                        <button id="create_img_prompt_btn" type="submit" name="form_action" value="create_img_prompt">Create image prompt</button><br>
+
+                        <p> Here is the edited prompt for image generation: </p>
+                        <p class="generated-content"> {{ recent_prompt }} </p>
+                        <p> Update form fields and click on the create prompt button to generate a new prompt. </p>
+
+                    </form>
+
+                    <form method="POST" action="/generate_images" name="create_img">
+                        <!-- Generate image with Dall E 3 -->
+                        <button id="gen_img_btn" type="submit" name="form_action" value="generate_image">Generate image</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Display images that are generated alongside the prompt -->
+            <div id="image-display">
+                <h2> Results </h2>
+                <p> Note: Save images by dragging and dropping to desktop or right clicking to select "Save Image As". </p>
+                <hr>
+                {% if prompt_img_pairs %}
+                    {% for pair in prompt_img_pairs %}
+                    {% if pair.get('image_file_path') %}
+                        <div class="prompt-img-pair">
+                            <p>Prompt: {{ pair.get('revised_prompt', pair['prompt']) }}</p>
+                            <img src="{{ url_for('static', filename=pair['image_file_path']) }}" alt="Generated Image">
+                        </div>
+                        <hr>
+                    {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>No results to display yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <!--  Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.12/store.everything.min.js"></script>
+    <script src="./static/js/generate_images.js"></script>
+    <script src="./static/js/nav.js"></script>
+</body>
+</html>
+

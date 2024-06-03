@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <title> Home</title>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="nav-bar">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/storyboard">Storyboard</a></li>
+                <li><a href="/generate_images">Image Generation</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Main section -->
+    <main>
+        <div id="home-main-section">
+            <h1> PlotPalette </h1>
+            <h2> An application for tackling writer's block using generative AI and storyboarding. </h2>
+            <h2> Application Features </h2>
+            <h3> Storyboard </h3>
+            <p> You can add, delete, and rearrange scenes. Click on the scene title and scene description to edit the text. You can upload an image to replace the placeholder image provided with each scene card. </p>
+            <p> You can also generate plot ideas and directly add the plot idea to your storyboard as a scene card. This scene card will be editable so you can modify the AI generated ideas if needed. </p>
+            <p> If you're stuck, try structuring your story using the Five Act Structure or the Hero's Journey by clicking the corresponding buttons to add these templates to your storyboard. </p>
+            <!-- Annotated screenshot of the page depicting various features -->
+            <img src="./static/img/annotated_storyboard_screenshot.jpg" style="width: 1000px;">
+            <h3> AI Image Generation </h3>
+            <p> You can generate images of multiple scenes from your story featuring the same character or generate
+                images of any settings, objects, creatures, etc. which are part of your narrative. To generate consistent
+            images of a character, you must first generate a character description that the AI will reuse to generate
+            subsequent images. </p>
+            <h3> Examples of image generation forms filled out </h3>
+            <!-- Annotated screenshot of the page depicting various features -->
+            <img src="./static/img/annotated_character_creation_form.jpg" style="width: 900px;">
+            <img src="./static/img/image_prompt_creation_form_screenshot.png" style="width: 300px;">
+        </div>
+    </main>
+
+    <!--  Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.12/store.everything.min.js"></script>
+    <script src="./static/js/nav.js"></script>
+</body>
+</html>
