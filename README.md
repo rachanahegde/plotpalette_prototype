@@ -1,2 +1,2 @@
 # PlotPalette Prototype
-PlotPalette prototype built for my MSc Computer Science dissertation.
+PlotPalette prototype built for my MSc Computer Science dissertation to enable writers to (1) outline stories with storyboard, (2) generate images of story scenes and consistent character art, and (3) generate plot ideas. Image and text generation was implemented using OpenAI’s GPT-4 and DALL·E 3 APIs and the website was built with Flask, Python, JavaScript, and HTML/CSS. User study demonstrated that website’s core features are useful for addressing writer’s block and providing inspiration.![image](https://github.com/rachanahegde/plotpalette_prototype/assets/66835338/e45c574d-160f-43f0-b1fb-92a639a453eb)
