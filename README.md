@@ -1,5 +1,5 @@
 # PlotPalette Prototype
-The PlotPalette prototype website was built for my MSc Computer Science dissertation to enable writers to (1) outline stories with storyboard, (2) generate images of story scenes and consistent character art, and (3) generate plot ideas. Image and text generation were implemented using OpenAI’s GPT-4 and DALL·E 3 APIs and the website was built with Flask, Python, JavaScript, and HTML/CSS. The user study demonstrated that the website’s core features are useful for addressing writer’s block and providing inspiration 
+The PlotPalette prototype website was built for my MSc Computer Science dissertation to enable writers to (1) outline stories with storyboard, (2) generate images of story scenes and consistent character art, and (3) generate plot ideas. Image and text generation were implemented using OpenAI’s GPT-4 and DALL·E 3 APIs and the website was built with Flask, Python, JavaScript, and HTML/CSS. The user study demonstrated that the website’s core features are useful for addressing writer’s block and providing inspiration.
 
 ## Screenshots
 ### Storyboard Example with Generated Plot Ideas
